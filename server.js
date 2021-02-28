@@ -58,12 +58,16 @@ fireAdmin.initializeApp({
 
 app.locals.fireAdmin = fireAdmin;
 
+// implement a shared PostgreSQL pool for use throughout the app
+app.set('pool', require('./server/pg-connector'));
+
 // set up security middleware
 app.all('/api/core/*', [require('./server/middleware/validateRequest')]);
 app.all('/api/core/admin/*', [require('./server/middleware/validateAdmin')]);
 
-// shared routes
+// API routes
 app.use('/api', require('./server/routes/api'));
+app.use('/api/companies', require('./server/routes/companies-api')); // this is currently a public route
 
 // catch all other routes and return index file
 app.all('*', (req, res) => {
