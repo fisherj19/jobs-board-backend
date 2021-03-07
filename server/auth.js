@@ -21,11 +21,11 @@ const auth = {
             res.locals._current_user_is_admin = decodedToken.admin || false;
             next();
           } else {
-            return res.status(403).send({ message: 'Not authorized' });
+            return res.status(403).send({ message: 'Invalid user' });
           }
         }).catch(e => {
           // console.log(e);
-          return res.status(401).send({ message: 'Invalid user' });
+          return res.status(401).send({ message: 'Not authorized' });
         });
     }
   }
