@@ -62,12 +62,15 @@ app.locals.fireAdmin = fireAdmin;
 app.set('pool', require('./server/pg-connector'));
 
 // set up security middleware
-app.all('/api/core/*', [require('./server/middleware/validateRequest')]);
+app.all('/api/core/*', [require('./server/middleware/validateRequest')]); //Core means you have to be logged in
 app.all('/api/core/admin/*', [require('./server/middleware/validateAdmin')]);
 
 // API routes
 app.use('/api', require('./server/routes/api'));
 app.use('/api/companies', require('./server/routes/companies-api')); // this is currently a public route
+app.use('/api/case_workers', require('./server/routes/case_workers-api')); // this is currently a public route
+//api/core/companies... if you want list to only be viewed by those who are logged in. (Update in front end company observable)
+
 
 // catch all other routes and return index file
 app.all('*', (req, res) => {
