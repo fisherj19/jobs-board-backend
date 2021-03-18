@@ -67,8 +67,9 @@ app.all('/api/core/admin/*', [require('./server/middleware/validateAdmin')]);
 
 // API routes
 app.use('/api', require('./server/routes/api'));
-app.use('/api/companies', require('./server/routes/companies-api')); // this is currently a public route
-app.use('/api/case_workers', require('./server/routes/case_workers-api')); // this is currently a public route
+app.use('/api/companies_users', require('./server/routes/companies_users-api')); // this is currently a public route
+app.use('/api/case_workers', require('./server/routes/case_workers-api'));
+app.use('/api/jobseekers_users', require('./server/routes/jobseekers_users-api'));  // this is currently a public route
 //api/core/companies... if you want list to only be viewed by those who are logged in. (Update in front end company observable)
 
 
