@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const case_workers = require('./jobseekers_users');
+const user = require('./jobseekers_users');
 
-router.get('/', (req, res) => users.getAll(req, res));
-router.get('/', (req, res) => users.getByID(req, res));
-router.post('/', (req, res) => users.insert(req, res));
-
+router.get('/', (req, res) => user.getAll(req, res));
+router.get('/', (req, res) => user.getByID(req, res));
+router.post('/', (req, res) => user.insert(req, res));
 
 module.exports = router;
