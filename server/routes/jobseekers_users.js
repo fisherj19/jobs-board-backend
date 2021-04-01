@@ -28,44 +28,43 @@ const users= {
   },
     insert: (req, res) => {
       const pool = req.app.get('pool');
-      const cuid = require('cuid');
       const qryStr = `
         insert into jobs.client (
-        id,
-        first_name,
-        last_name,
-        date_of_birth,
-        sex,
-        support_contact,
-        phone_number,
-        email_address,
-        owns_car,
-        has_license,
-        ride_available,
-        job_interests,
-        status_id,
-        date_created,
-        skills
-      ) values (
-        $1,
-        $2,
-        $3,
-        $4,
-        $5,
-        $6,
-        $7,
-        $8,
-        $9,
-        $10,
-        $11,
-        $12,
-        $13,
-        $14,
-        $15
-      )
-    `;
+          id,
+          first_name,
+          last_name,
+          date_of_birth,
+          sex,
+          support_contact,
+          phone_number,
+          email_address,
+          owns_car,
+          has_license,
+          ride_available,
+          job_interests,
+          status_id,
+          date_created,
+          skills
+        ) values (
+          $1,
+          $2,
+          $3,
+          $4,
+          $5,
+          $6,
+          $7,
+          $8,
+          $9,
+          $10,
+          $11,
+          $12,
+          $13,
+          $14,
+          $15
+        )
+      `;
       const params = [
-        cuid(),
+        req.body.id,
         req.body.firstName,
         req.body.lastName,
         req.body.dateOfBirth,
@@ -77,7 +76,7 @@ const users= {
         Boolean(req.body.has_license),
         Boolean(req.body.ride_available),
         req.body.job_interests,
-        req.body.status_id,
+        req.body.status_id || 5,
         new Date(),
         req.body.skills
       ];
