@@ -30,19 +30,20 @@ const users= {
       const qryStr = `
         update jobs.client 
           set first_name = $2,
-          last_name = $3,
-          date_of_birth = $4,
-          sex = $5,
-          support_contact = $6,
-          phone_number = $7,
-          owns_car = $8,
-          has_license = $9,
-          ride_available = $10,
-          job_interests = $11,
-          status_id = $12,
-          date_created = $13,
-          address = $14,
-          skills = $15
+            last_name = $3,
+            date_of_birth = $4,
+            sex = $5,
+            phone_number = $6,
+            email_address = $7,
+            address = $8,
+            owns_car = $9,
+            has_license = $10,
+            ride_available = $11,
+            status_id = $12,
+            experience = $13,
+            job_interests = $14,
+            last_updated = $15,
+            skills = $16
           where id = $1
       `;
       const params = [
@@ -51,18 +52,46 @@ const users= {
         req.body.lastName,
         req.body.dateOfBirth,
         req.body.gender,
-        req.body.support_contact,
         req.body.phone_number,
-        Boolean(req.body.owns_car),
-        Boolean(req.body.has_license),
-        Boolean(req.body.ride_available),
-        req.body.job_interests,
-        req.body.status_id,
-        new Date(),
+        req.body.email_address,
         req.body.address,
+        Boolean(req.body.has_license),
+        Boolean(req.body.owns_car),
+        Boolean(req.body.ride_available),
+        req.body.status_id,
+        req.body.experience,
+        req.body.job_interests,
+        new Date(),
         req.body.skills
       ];
       pool.insert(res, qryStr, params);
+    },
+    getById: (req, res) => {
+      const pool = req.app.get('pool');
+      const qryStr = `
+          first_name,
+          last_name,
+          date_of_birth,
+          primary_email,
+          address1,
+          address2,
+          city,
+          state,
+          zip_code,
+          neighborhood_id,
+          date_created,
+          created_by,
+          last_updated,
+          updated_by,
+          date_reviewed,
+          reviewed_by
+        from jobs.client
+        where id = $1
+      `;
+      const params = new Array(req.params.id);
+
+      pool.selectOne(res, qryStr, params, 'company');
+
     }
   };
 
