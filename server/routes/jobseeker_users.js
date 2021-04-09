@@ -72,19 +72,16 @@ const users= {
           first_name,
           last_name,
           date_of_birth,
-          primary_email,
-          address1,
-          address2,
-          city,
-          state,
-          zip_code,
-          neighborhood_id,
-          date_created,
-          created_by,
-          last_updated,
-          updated_by,
-          date_reviewed,
-          reviewed_by
+          phone_number,
+          email_address,
+          address,
+          owns_car,
+          has_license,
+          ride_available,
+          status_id,
+          experience,
+          job_interests,
+          skills
         from jobs.client
         where id = $1
       `;
