@@ -65,13 +65,14 @@ const users= {
         req.body.skills
       ];
       pool.insert(res, qryStr, params);
-    },
-    getById: (req, res) => {
+  },
+    getByID: (req, res) => {
       const pool = req.app.get('pool');
       const qryStr = `
-          first_name,
+          Select first_name,
           last_name,
           date_of_birth,
+          sex,
           phone_number,
           email_address,
           address,
