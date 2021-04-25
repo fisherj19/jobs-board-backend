@@ -91,13 +91,21 @@ const users= {
           sex,
           phone_number,
           email_address,
-          address,
+          street,
+          city,
+          state,
+          zip,
           owns_car,
           has_license,
           ride_available,
           status_id,
-          experience,
           job_interests,
+          job_1,
+          empl_1,
+          job_2,
+          empl_2,
+          job_3,
+          empl_3,
           skills
         from jobs.client
         where id = $1
