@@ -67,6 +67,7 @@ app.all('/api/core/admin/*', [require('./server/middleware/validateAdmin')]);
 
 // API routes
 app.use('/api', require('./server/routes/api'));
+app.use('/api/core', require('./server/routes/api'));
 app.use('/api/companies_users', require('./server/routes/companies_users-api')); // this is currently a public route
 app.use('/api/case_workers', require('./server/routes/case_workers-api'));
 app.use('/api/jobseeker_users', require('./server/routes/jobseeker_users-api'));  // this is currently a public route

@@ -59,6 +59,7 @@ const companies = {
     const pool = req.app.get('pool');
     const qryStr = `
       insert into jobs.company (
+        id,
         name,
         primary_first_name,
         primary_last_name,
@@ -88,12 +89,14 @@ const companies = {
         $11,
         $12,
         $13,
-        $12,
-        $13
+        $14,
+        $13,
+        $14
       )
     `;
     const params = [ //On the request the body objects have all different properties
-      req.body.name, //http form fields match the name of a field on the form
+      req.body.id, //http form fields match the name of a field on the form
+      req.body.name,
       req.body.primary_first_name,
       req.body.primary_last_name,
       req.body.primary_phone,
@@ -105,7 +108,7 @@ const companies = {
       req.body.zip_code,
       req.body.neighborhood_id,
       new Date(),
-      res.body.name
+      req.body.id
     ];
     pool.insert(res, qryStr, params);
   }
