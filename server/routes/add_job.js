@@ -2,14 +2,14 @@ const add_job= {
     getAll: (req, res) => {
       const pool = req.app.get('pool');
       const qryStr = `
-        companyName,
-        jobName,
-        jobDescription,
-        name,
-        phoneNumber,
+        select company_name,
+        job_name,
+        job_description,
+        contact,
+        phone_number,
         email,
-        listDate,
-        fillDate,
+        list_date,
+        fill_date
         from jobs.client
       `;
       pool.select(res, qryStr);
@@ -32,15 +32,15 @@ const add_job= {
         const pool = req.app.get('pool');
         const cuid = require('cuid');
         const qryStr = `
-          insert into jobs.add_job (
-            companyName,
-            jobName,
-            jobDescription,
-            name,
-            phoneNumber,
-            email,
-            listDate,
-            fillDate
+          insert into jobs.jobs (
+            company_name,
+            job_mame,
+            job_description,
+            contact,
+            phone_number,
+            email_address,
+            list_date,
+            fill_date
         ) values (
           $1,
           $2,
@@ -49,20 +49,18 @@ const add_job= {
           $5,
           $6,
           $7,
-          $8,
+          $8
         )
       `;
         const params = [
-          cuid(),
-          req.body.companyName,
-          req.body.jobName,
-          req.body.jobDescription,
-          req.body.whoContact,
-          req.body.name,
-          req.body.phoneNumber,
-          req.body.email,
-          req.body.listDate,
-          req.body.fillDate
+          req.body.company_name,
+          req.body.job_name,
+          req.body.job_description,
+          req.body.contact,
+          req.body.phone_number,
+          req.body.email_address,
+          req.body.list_date,
+          req.body.fill_date
         ];
         pool.insert(res, qryStr, params);
       }
