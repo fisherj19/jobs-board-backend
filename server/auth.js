@@ -28,6 +28,20 @@ const auth = {
           return res.status(401).send({ message: 'Not authorized' });
         });
     }
+  },
+
+  getProfileType: (req, res) => {
+    const pool = req.app.get('pool');
+    const qryStr = `
+      select case when c.id is not null then 'company' else 'seeker' end as type
+      from jobs.company c
+        cross join jobs.client u
+      where c.id = $1
+        or u.id = $1
+    `;
+    const params = [res.locals._current_user_id];
+
+    pool.selectOne(res, qryStr, params, 'profile');
   }
 };
 
