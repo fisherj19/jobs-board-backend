@@ -32,7 +32,7 @@ const add_job= {
         const pool = req.app.get('pool');
         const cuid = require('cuid');
         const qryStr = `
-          insert into jobs.add_job (
+          insert into jobs.job (
             companyName,
             jobName,
             jobDescription,
