@@ -19,7 +19,8 @@ const companies = {
         last_updated,
         updated_by,
         date_reviewed,
-        reviewed_by
+        reviewed_by,
+        company_description
       from jobs.company
       order by id asc limit 10
     `;
